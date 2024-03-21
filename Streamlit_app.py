@@ -6,7 +6,7 @@ import requests
 from nbformat import read
 
 # Đọc file Jupyter Notebook
-url = "url_to_your_notebook.ipynb"
+url = "https://github.com/chuthihoainu/ppncln3/blob/master/Main_RFM_3.ipynb"
 notebook = read(url)
 
 # Hiển thị tiêu đề của file Jupyter Notebook
