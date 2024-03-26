@@ -1,25 +1,31 @@
 import streamlit as st
-st.image("download.jpg")
-st.write("VPANDAS xin chào ạ")
 
-import requests
-from nbformat import read
+# Tạo biến để lưu trữ trạng thái đăng nhập
+logged_in = False
 
-# Đọc file Jupyter Notebook
-url = "https://github.com/chuthihoainu/ppncln3/blob/master/Main_RFM_3.ipynb"
-notebook = read(url)
+# Hiển thị màn hình đăng nhập
+while not logged_in:
+    # Thêm tiêu đề
+    st.text("Đăng nhập")
 
-# Hiển thị tiêu đề của file Jupyter Notebook
-st.title(notebook['metadata']['title'])
+    # Thêm ô nhập tên người dùng
+    username = st.text_input("Tên người dùng:")
 
-# Duyệt qua các cell trong file Jupyter Notebook
-for cell in notebook['cells']:
-    # Kiểm tra loại cell
-    if cell['cell_type'] == 'markdown':
-        # Hiển thị nội dung markdown
-        st.markdown(cell['source'])
-    elif cell['cell_type'] == 'code':
-        # Chạy mã code
-        exec(cell['source'])
+    # Thêm ô nhập mật khẩu
+    password = st.text_input("Mật khẩu:", type="password")
 
+    # Thêm nút bấm đăng nhập
+    if st.button("Đăng nhập"):
+        # Kiểm tra tên người dùng và mật khẩu
+        if username == "admin" and password == "password":
+            # Đặt trạng thái đăng nhập thành True
+            logged_in = True
+        else:
+            # Hiển thị thông báo lỗi
+            st.error("Tên người dùng hoặc mật khẩu không chính xác.")
+
+# Hiển thị trang chủ sau khi đăng nhập thành công
+if logged_in:
+    st.text("Đăng nhập thành công!")
+    # Thêm nội dung trang chủ ở đây
 
